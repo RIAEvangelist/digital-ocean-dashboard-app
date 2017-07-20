@@ -6,16 +6,66 @@
   margin: 1vh 1vw;
 }
 
-.droplet ul{
-  margin:0;
-  padding:0;
+.droplet .header{
+  display:flex;
+  flex-direction: row;
+  height:6vh;
+  margin: 1vh 1vw 1.5vh;
+}
+
+.droplet img{
+  height:100%;
+}
+
+.droplet .name{
+  margin:0 0 0 1vw;
 }
 
 .droplet h3 {
-  text-align: center;
+  margin:0;
+  padding:0;
+  font-size: 4vh;
 }
+
+.droplet .ip{
+  font-size: 2vh;
+  color:rgb(100,100,100);
+  padding:0;
+  margin:0;
+}
+
+.droplet thead{
+  font-weight:bold;
+  border-bottom:1px solid rgb(100,100,100);
+}
+
+.droplet thead tr{
+  border-bottom:1px solid rgb(100,100,100);
+}
+
+.droplet tbody td{
+  padding:.5vh;
+}
+
+.droplet ul{
+  margin:0;
+  padding:0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .droplet li {
   list-style:none;
   padding:1vh 1vw;
   margin:0;
+}
+
+.droplet .monthly{
+  font-size: 2.5vh;
+}
+
+.droplet .hourly{
+  font-size: 1.6vh;
+  padding-top:1.8vh;
 }

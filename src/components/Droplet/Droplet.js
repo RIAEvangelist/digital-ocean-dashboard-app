@@ -15,30 +15,59 @@ class Droplet extends BP{
   render(){
     return (
       <li className='droplet'>
-        <h3 className='blueText'>
-          {this.props.name}
-        </h3>
+        <div className='header'>
+          <img className='distributionicon' src={`./icons/${this.props.image.distribution.toLowerCase()}.png`} />
+          <div className='name'>
+            <h3 className='blueText'>
+              {this.props.name}
+            </h3>
+            <p className='ip'>
+              {this.props.networks.v4[0].ip_address}
+            </p>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <td>
+              spec
+            </td>
+            <td>
+              value
+            </td>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                cpu
+              </td>
+              <td>
+                {this.props.vcpus} cores
+              </td>
+            </tr>
+            <tr>
+              <td>
+                RAM
+              </td>
+              <td>
+                {this.props.size.memory/1024}Gb
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Disk Size
+              </td>
+              <td>
+                {this.props.size.disk}Gb
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <ul>
-          <li>
-            {this.props.vcpus} cores
-          </li>
-          <li>
-            {this.props.size.memory/1024}Gb ram
-          </li>
-          <li>
-            {this.props.size.disk}Gb disk
-          </li>
-          <li>
-            ${this.props.size.price_hourly}/hr
-          </li>
-          <li>
+          <li className='monthly blueText'>
             ${this.props.size.price_monthly}/month
           </li>
-          <li>
-            {this.props.networks.v4[0].type} IP {this.props.networks.v4[0].ip_address}
-          </li>
-          <li>
-            {this.props.image.distribution}
+          <li className='hourly'>
+            ${this.props.size.price_hourly}/hr
           </li>
         </ul>
       </li>
