@@ -47,7 +47,7 @@ class Actions extends Events{
 
   error(err){
     console.warn('DOAPI Error')
-    console.log(err);
+    console.trace(err);
   }
 }
 

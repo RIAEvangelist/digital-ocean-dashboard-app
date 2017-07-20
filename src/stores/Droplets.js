@@ -16,6 +16,7 @@ class Droplets extends Events {
   }
 
   map(data){
+    console.log(data);
     this.droplets=Object.assign([],data);
 
     delete this.droplets._digitalOcean;

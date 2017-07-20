@@ -9,20 +9,30 @@ import './Droplet.css';
 class Droplet extends BP{
   constructor(){
     super();
+
+    this.state={};
   }
 
   shouldComponentUpdate(nextProps,nextState){
+    if(nextProps){
+      this.setState(nextProps);
+    }
     return true;
   }
 
   toggleDropletPower(e){
-    console.log(e.target.checked);
     DOAPI.setPowered(e.target.checked,this.props.id);
+    this.setState(
+      {
+        status:'archive'
+      }
+    );
+    console.log(e.target.checked,this.state);
   }
 
   render(){
     return (
-      <li className={`droplet ${this.props.status}`}>
+      <li className={`droplet ${this.state.status||this.props.status}`}>
         <div className='header'>
           <img className='distributionicon' src={`./icons/${this.props.image.distribution.toLowerCase()}.png`} />
           <div className='name'>
