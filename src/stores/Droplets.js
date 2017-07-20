@@ -6,16 +6,22 @@ class Droplets extends Events {
   constructor(){
     super();
 
+    this.droplets=localStorage.getItem('droplets')||'[]';
+    this.droplets=JSON.parse(this.droplets);
+
     actions.results.on(
       'gotDroplets',
-      this.map
+      this.map.bind(this)
     );
   }
 
   map(data){
+    this.droplets=Object.assign([],data);
 
+    delete this.droplets._digitalOcean;
     this.trigger('update');
 
+    localStorage.setItem('droplets',JSON.stringify(this.droplets));
   }
 }
 

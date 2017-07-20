@@ -12,16 +12,31 @@ class DropletList extends BP{
     super();
     DOAPI.trigger('getDroplets');
     this.state={
-      droplets:[]
+      droplets:Droplets.droplets
     }
+
+    console.log(this.state)
   }
 
   componentDidMount(){
-    Droplets.on('update',this.update);
+    this.updateScope=this.update.bind(this);
+    Droplets.on('update',this.updateScope);
+  }
+
+  componentWillUnmount(){
+    Droplets.off('update',this.updateScope);
   }
 
   shouldComponentUpdate(nextProps,nextState){
-    if(this.state.droplets.length!==nextState.droplets.length){
+    if(this.state.droplets.length==nextState.droplets.length){
+      const count=this.state.droplets.length;
+      if(
+        count>0
+        && nextState.droplets[0].id!==this.state.droplets[0].id
+        || nextState.droplets[count-1].id!==this.state.droplets[count-1].id
+      ){
+        return true;
+      }
       return false;
     }
     return true;
@@ -30,7 +45,7 @@ class DropletList extends BP{
   update(){
     this.setState(
       {
-
+        droplets:Droplets.droplets
       }
     );
   }
@@ -38,7 +53,44 @@ class DropletList extends BP{
   render(){
     return (
       <ol>
-        <li>empty</li>
+        {
+          this.state.droplets.map(
+            function(droplet){
+              console.log(droplet)
+              return(
+                <li>
+                  <ul>
+                    <li>
+                      {droplet.name}
+                    </li>
+                    <li>
+                      {droplet.vcpus} cores
+                    </li>
+                    <li>
+                      {droplet.size.memory/1024}Gb ram
+                    </li>
+                    <li>
+                      {droplet.size.disk}Gb disk
+                    </li>
+                    <li>
+                      ${droplet.size.price_hourly}/hr
+                    </li>
+                    <li>
+                      ${droplet.size.price_monthly}/month
+                    </li>
+                    <li>
+                      {droplet.networks.v4[0].type} IP {droplet.networks.v4[0].ip_address}
+                    </li>
+                    <li>
+                      {droplet.image.distribution}
+                    </li>
+                  </ul>
+                  <hr/>
+                </li>
+              );
+            }
+          )
+        }
       </ol>
     );
   }

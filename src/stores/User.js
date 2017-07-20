@@ -20,7 +20,12 @@ class User extends Events {
 
     actions.results.on(
       'gotUser',
-      this.map
+      this.map.bind(this)
+    );
+
+    actions.results.on(
+      '*',
+      this.mapRateLimits.bind(this)
     );
   }
 
@@ -31,9 +36,6 @@ class User extends Events {
     this.floatingIPLimit=data.floating_ip_limit;
     this.status=data.status;
     this.statusMessage=data.status_message;
-    this.rateLimit=data['ratelimit-limit'];
-    this.rateLimitRemaining=data['ratelimit-remaining'];
-    this.rateLimitReset=['data.ratelimit-reset'];
 
     this.hash=crypto.createHash('md5').update(this.email).digest("hex");
 
@@ -42,6 +44,15 @@ class User extends Events {
 
     localStorage.setItem('userEmail',this.email);
     localStorage.setItem('userHash',this.hash);
+  }
+
+  mapRateLimits(data){
+    this.rateLimit=data['ratelimit-limit'];
+    this.rateLimitRemaining=data['ratelimit-remaining'];
+    this.rateLimitReset=['data.ratelimit-reset'];
+
+    this.trigger('update');
+
   }
 }
 

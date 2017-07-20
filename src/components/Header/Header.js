@@ -18,11 +18,16 @@ class Header extends BP{
   }
 
   componentDidMount(){
-    User.on('update',this.update);
+    this.updateScope=this.update.bind(this);
+
+    User.on(
+      'update',
+      this.updateScope
+    );
   }
 
   componentWillUnmount(){
-    User.off('update',this.update);
+    User.off('update',this.updateScope);
   }
 
   shouldComponentUpdate(nextProps,nextState){

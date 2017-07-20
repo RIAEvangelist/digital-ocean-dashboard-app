@@ -38,7 +38,8 @@ class Actions extends Events{
   }
 
   error(err){
-    console.log('DOAPI Error')
+    console.warn('DOAPI Error')
+    console.log(err);
   }
 }
 
@@ -54,7 +55,6 @@ class Results extends Events{
 
   gotDroplets(droplets){
     this.trigger('gotDroplets',droplets);
-    console.log(droplets);
   }
 }
 
