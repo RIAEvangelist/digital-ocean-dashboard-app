@@ -11,6 +11,10 @@ import './DropletList.css';
 class DropletList extends BP{
   constructor(){
     super();
+    setInterval(
+        DOAPI.trigger.bind(DOAPI,'getDroplets'),
+        15000
+    );
     DOAPI.trigger('getDroplets');
     this.state={
       droplets:Droplets.droplets

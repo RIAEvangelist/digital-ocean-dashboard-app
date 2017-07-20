@@ -1,5 +1,8 @@
 import React from 'react';
 import BP from '../BP/BP.js';
+import Toggle from '../Toggle/Toggle.js';
+
+import DOAPI from '../../actions/DOAPI.js';
 
 import './Droplet.css';
 
@@ -12,9 +15,14 @@ class Droplet extends BP{
     return true;
   }
 
+  toggleDropletPower(e){
+    console.log(e.target.checked);
+    DOAPI.setPowered(e.target.checked,this.props.id);
+  }
+
   render(){
     return (
-      <li className='droplet'>
+      <li className={`droplet ${this.props.status}`}>
         <div className='header'>
           <img className='distributionicon' src={`./icons/${this.props.image.distribution.toLowerCase()}.png`} />
           <div className='name'>
@@ -25,6 +33,9 @@ class Droplet extends BP{
               {this.props.networks.v4[0].ip_address}
             </p>
           </div>
+          <button>
+            𝍢
+          </button>
         </div>
         <table>
           <thead>
@@ -67,9 +78,22 @@ class Droplet extends BP{
             ${this.props.size.price_monthly}/month
           </li>
           <li className='hourly'>
-            ${this.props.size.price_hourly}/hr
+            ${this.props.size.price_hourly.toFixed(2)}/hr
           </li>
         </ul>
+        <section className='menu'>
+        <Toggle
+          is_on={
+            (this.props.status!=='off')? true:false
+          }
+
+          disabled={
+            (this.props.status=='archived')? true:false
+          }
+
+          onChange={this.toggleDropletPower.bind(this)}
+        />
+        </section>
       </li>
     );
   }

@@ -37,6 +37,14 @@ class Actions extends Events{
       .catch(this.error);
   }
 
+  setPowered(setPowered=false,id){
+    DO.droplets[
+      ((!setPowered)? 'shutdown':'powerOn')
+    ](id)
+      .then(this.results.requestedPowerChange.bind(this.results))
+      .catch(this.error);
+  }
+
   error(err){
     console.warn('DOAPI Error')
     console.log(err);
@@ -55,6 +63,10 @@ class Results extends Events{
 
   gotDroplets(droplets){
     this.trigger('gotDroplets',droplets);
+  }
+
+  requestedPowerChange(data){
+    console.log(data);
   }
 }
 

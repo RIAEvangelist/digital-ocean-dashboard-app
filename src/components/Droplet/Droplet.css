@@ -4,13 +4,43 @@
   list-style: none;
   padding: 1vh 3vw;
   margin: 1vh 1vw;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .droplet .header{
   display:flex;
   flex-direction: row;
   height:6vh;
-  margin: 1vh 1vw 1.5vh;
+  margin: 1vh 0 1.5vh;
+}
+
+.droplet .header button{
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 5vh;
+  margin: -4vh -2vh 0 1vh;
+  color: rgb(100,100,100);
+  outline: none;
+  cursor:pointer;
+}
+
+.droplet.off{
+  filter: grayscale(10);
+}
+
+.droplet.archive{
+  filter: grayscale(10);
+  background:rgb(200,200,200);
+  opacity:.5;
+}
+
+.droplet.new{
+  background:rgba(0,105,255,.2);
 }
 
 .droplet img{
@@ -18,7 +48,7 @@
 }
 
 .droplet .name{
-  margin:0 0 0 1vw;
+  margin:0 1.4vw;
 }
 
 .droplet h3 {
@@ -34,6 +64,10 @@
   margin:0;
 }
 
+.droplet table{
+  width: 100%;
+}
+
 .droplet thead{
   font-weight:bold;
   border-bottom:1px solid rgb(100,100,100);
@@ -44,7 +78,7 @@
 }
 
 .droplet tbody td{
-  padding:.5vh;
+  padding-right:1vh;
 }
 
 .droplet ul{
@@ -57,7 +91,7 @@
 
 .droplet li {
   list-style:none;
-  padding:1vh 1vw;
+  padding: 1vh .4vw;
   margin:0;
 }
 
@@ -68,4 +102,8 @@
 .droplet .hourly{
   font-size: 1.6vh;
   padding-top:1.8vh;
+}
+
+.droplet .menu{
+  background: rgba(255,255,255,.8);
 }
