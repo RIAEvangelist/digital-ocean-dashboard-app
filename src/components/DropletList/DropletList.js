@@ -2,8 +2,9 @@ import React from 'react';
 import BP from '../BP/BP.js';
 
 import DOAPI from '../../actions/DOAPI.js';
-
 import Droplets from '../../stores/Droplets.js';
+
+import Droplet from '../Droplet/Droplet.js';
 
 import './DropletList.css';
 
@@ -14,8 +15,6 @@ class DropletList extends BP{
     this.state={
       droplets:Droplets.droplets
     }
-
-    console.log(this.state)
   }
 
   componentDidMount(){
@@ -28,17 +27,6 @@ class DropletList extends BP{
   }
 
   shouldComponentUpdate(nextProps,nextState){
-    if(this.state.droplets.length==nextState.droplets.length){
-      const count=this.state.droplets.length;
-      if(
-        count>0
-        && nextState.droplets[0].id!==this.state.droplets[0].id
-        || nextState.droplets[count-1].id!==this.state.droplets[count-1].id
-      ){
-        return true;
-      }
-      return false;
-    }
     return true;
   }
 
@@ -52,41 +40,12 @@ class DropletList extends BP{
 
   render(){
     return (
-      <ol>
+      <ol className='dropletList'>
         {
           this.state.droplets.map(
             function(droplet){
-              console.log(droplet)
               return(
-                <li>
-                  <ul>
-                    <li>
-                      {droplet.name}
-                    </li>
-                    <li>
-                      {droplet.vcpus} cores
-                    </li>
-                    <li>
-                      {droplet.size.memory/1024}Gb ram
-                    </li>
-                    <li>
-                      {droplet.size.disk}Gb disk
-                    </li>
-                    <li>
-                      ${droplet.size.price_hourly}/hr
-                    </li>
-                    <li>
-                      ${droplet.size.price_monthly}/month
-                    </li>
-                    <li>
-                      {droplet.networks.v4[0].type} IP {droplet.networks.v4[0].ip_address}
-                    </li>
-                    <li>
-                      {droplet.image.distribution}
-                    </li>
-                  </ul>
-                  <hr/>
-                </li>
+                <Droplet {...droplet} />
               );
             }
           )

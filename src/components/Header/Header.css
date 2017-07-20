@@ -2,13 +2,15 @@ header{
   height:5vh;
   overflow:hidden;
 
-  background-color:rgb(180,220,240);
-
-  box-shadow:0 0 2vh rgba(0,0,0,.7);
-
   display:flex;
   justify-content: flex-start;
   flex-direction: row-reverse;
+}
+
+header p{
+  margin: 0;
+  padding: 2.5vh 2vw;
+  font-size: 2vh;
 }
 
 .user-avatar{

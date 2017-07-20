@@ -1,17 +1,7 @@
-header{
-  height:5vh;
-  overflow:hidden;
-
-  background-color:rgb(180,220,240);
-
-  box-shadow:0 0 2vh rgba(0,0,0,.7);
-
+.dropletList{
+  list-style: none;
+  padding:1vh 1vw;
   display:flex;
-  justify-content: flex-start;
-  flex-direction: row-reverse;
-}
-
-.user-avatar{
-  height:100%;
-  margin-left:2vw;
+  flex-direction: row;
+  justify-content: center;
 }

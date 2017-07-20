@@ -5,3 +5,11 @@ body * {
 .App {
 
 }
+
+.blueText{
+  color:rgb(0, 105, 255);
+}
+
+.blueBackground{
+  background-color:rgb(0, 105, 255);
+}
